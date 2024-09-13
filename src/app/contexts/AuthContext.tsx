@@ -1,5 +1,3 @@
-// src/contexts/AuthContext.tsx
-
 'use client'; // Ensure this file is treated as a client component
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
@@ -20,10 +18,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
-      // Redirect if necessary
-        router.push('/chat');
+    } else {
+      setIsAuthenticated(false);
     }
-  }, [router]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>

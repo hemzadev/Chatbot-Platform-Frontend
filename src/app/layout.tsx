@@ -1,9 +1,7 @@
-// src/app/layout.tsx
-
 import { Inter } from 'next/font/google';
 import './globals.css';
-import HomepageWrapper from './homepageWrapper';
-import { AuthProvider } from './contexts/AuthContext'; // Adjust import path as needed
+import { AuthProvider } from './contexts/AuthContext'; // Adjust the import path as necessary
+import AuthRedirector from './contexts/AuthRedirector'; // Adjust the import path as necessary
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,7 +27,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AuthProvider>
-          <HomepageWrapper>{children}</HomepageWrapper>
+          <AuthRedirector>
+            {children}
+          </AuthRedirector>
         </AuthProvider>
       </body>
     </html>

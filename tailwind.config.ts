@@ -1,8 +1,6 @@
 import type { Config } from "tailwindcss";
 import { createThemes } from "tw-colors";
 import colors from "tailwindcss/colors";
-import { Inter } from "next/font/google";
-
 
 const baseColors = [
   "gray",
@@ -12,23 +10,23 @@ const baseColors = [
   "blue",
   "indigo",
   "purple",
-  "pink",  
+  "pink",
 ];
 
 const shadeMapping = {
-  "50" : "900",
-  "100" : "800",
-  "200" : "700",
-  "300" : "600",
-  "400" : "500",
-  "500" : "400",
-  "600" : "300",
-  "700" : "200",
-  "800" : "100",
-  "900" : "50",
-}
+  "50": "900",
+  "100": "800",
+  "200": "700",
+  "300": "600",
+  "400": "500",
+  "500": "400",
+  "600": "300",
+  "700": "200",
+  "800": "100",
+  "900": "50",
+};
 
-const generateThemeObject = ( colors: any, mapping: any, invert = false ) => {
+const generateThemeObject = (colors: any, mapping: any, invert = false) => {
   const theme: any = {};
   baseColors.forEach((color) => {
     theme[color] = {};
@@ -38,7 +36,7 @@ const generateThemeObject = ( colors: any, mapping: any, invert = false ) => {
     });
   });
   return theme;
-}
+};
 
 const lightTheme = generateThemeObject(colors, shadeMapping);
 const darkTheme = generateThemeObject(colors, shadeMapping, true);
@@ -53,8 +51,8 @@ const themes = {
     ...darkTheme,
     white: colors.gray["950"],
     black: colors.gray["50"],
-  }
-}
+  },
+};
 
 const config: Config = {
   darkMode: "class",
@@ -67,11 +65,16 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
         customBlue: '#133D7C',
+        'light-white': '#f8fafc',
+        'light-gray': {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          600: '#4b5563',
+        },
       },
       fontFamily: {
         Inter: ['Inter', 'sans-serif'],
@@ -93,6 +96,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [createThemes(themes)],
+  plugins: [
+    createThemes(themes),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
 };
+
 export default config;

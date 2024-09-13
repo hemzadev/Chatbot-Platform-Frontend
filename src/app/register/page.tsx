@@ -29,7 +29,7 @@ const Register: React.FC = () => {
         localStorage.setItem('token', data.token);
         setMessage('Registration successful!');
         // Optionally redirect after successful registration
-        // router.push('/login');
+        router.push('/login');
       } else {
         setMessage('Registration successful, but no token returned.');
       }
